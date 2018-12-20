@@ -1,0 +1,28 @@
+# Use the official miniconda3 as a parent image
+FROM continuumio/miniconda3:latest
+
+# Set the working directory to /app
+WORKDIR /nadeem_website
+
+# Copy the current directory contents into the container at /app
+COPY . /nadeem_website
+
+# Install the needed packages specified in requirements.txt
+RUN export HTTP_PROXY='http://genproxy.amdocs.com:8080/' && \
+	export HTTPS_PROXY='http://genproxy.amdocs.com:8080/' && \
+	cd /opt/conda/bin/ && \
+	/opt/conda/bin/conda config --set always_yes True && \
+	/opt/conda/bin/conda config --set proxy_servers http:http://genproxy.amdocs.com:8080 && \
+	/opt/conda/bin/conda config --set proxy_servers https:http://genproxy.amdocs.com:8080 && \
+	/opt/conda/bin/conda install --channel "anaconda" flask
+
+# Make port available to the world outside this container
+#EXPOSE 5000
+
+#VOLUME /nadeem_website/DB
+
+# Define environment variable
+#ENV NAME World
+
+# Run my_website.py when the container launches
+CMD ["/opt/conda/bin/python", "my_website.py"]
