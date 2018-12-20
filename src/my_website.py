@@ -3,16 +3,13 @@ import sqlite3 as sql
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def home():
     return render_template('home.html')
 
-
 @app.route('/enternew')
 def new_student():
     return render_template('student.html')
-
 
 @app.route('/addrec', methods=['POST', 'GET'])
 def addrec():
@@ -38,7 +35,6 @@ def addrec():
             return render_template("result.html", msg=msg)
             con.close()
 
-
 @app.route('/list')
 def list():
     con = sql.connect("database.db")
@@ -50,6 +46,5 @@ def list():
     rows = cur.fetchall();
     return render_template("list.html", rows=rows)
 
-
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0',port=5077)
+    app.run(debug=True,host='0.0.0.0',port=5000)

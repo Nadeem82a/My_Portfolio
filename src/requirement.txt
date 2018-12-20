@@ -1,0 +1,3 @@
+fprophet
+flask
+sqlite
