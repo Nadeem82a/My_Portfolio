@@ -4,7 +4,7 @@ pipeline {
     stage('Initialize') {
       agent {
         dockerfile {
-          filename 'Dockerfile'
+          filename 'src/Dockerfile'
         }
 
       }
