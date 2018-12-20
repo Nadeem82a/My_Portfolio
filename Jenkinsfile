@@ -1,7 +1,7 @@
 pipeline {
   agent none
   stages {
-    stage('') {
+    stage('Initialize') {
       steps {
         sh '''file_name=$1
 echo ${file_name}
@@ -11,6 +11,7 @@ echo -e "Jenkins: ${BUILD_TAG}\\nGit: ${GIT_BRANCH} ${GIT_COMMIT}" > build_info_
 zip -r ${file_name} * -x build.sh
 echo "The build is completed"
 '''
+        echo 'This is a minimal pipeline.'
       }
     }
   }
